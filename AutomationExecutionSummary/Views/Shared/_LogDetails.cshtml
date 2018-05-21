@@ -1,0 +1,126 @@
+﻿@model AutomationExecutionSummary.Models.Dashboard.Dashboard
+<div>
+    @using (Html.BeginForm("UpdateLog", "Dashboard", FormMethod.Post, new { id = "UpdateLog" }))
+    {
+        <br />
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="2">
+                    <label class="label label-info">Basic Details</label>
+                </td>
+            </tr>
+            <tr hidden="hidden">
+                <td style="width:30%">
+                    @Html.Label("Test Case ID")
+                </td>
+                <td style="width:70%">
+                    @Html.HiddenFor(Model => Model.LogId)
+                    @Html.HiddenFor(Model => Model.TestCaseId, Model.TestCaseId)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%">
+                    @Html.Label("Mobile Number")
+                </td>
+                <td style="width:70%">
+                    @Html.TextBoxFor(model => Model.BugID, new { style = "max-width:100%;width:100%" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%">
+                    @Html.Label("First Name")
+                </td>
+                <td style="width:70%">
+                    @Html.TextBoxFor(model => Model.Comment, new { style = "max-width:100%;width:100%" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%">
+                    @Html.Label("Last Name")
+                </td>
+                <td style="width:70%">
+                    @Html.TextBoxFor(model => Model.Extra_One, new { style = "max-width:100%;width:100%" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%">
+                    @Html.Label("Email Id")
+                </td>
+                <td style="width:70%">
+                    @Html.TextBoxFor(model => Model.Extra_Two, new { style = "max-width:100%;width:100%" })
+                </td>
+            </tr>
+            <tr>
+                <td style="width:30%">
+                    @Html.Label("Status")
+                </td>
+                <td style="width:70%">
+                    @Html.TextBoxFor(model => Model.OutCome, new { style = "max-width:100%;width:100%" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <input type="submit" id="btnAdd" value="Add" class="btn btn-primary btn-sm" />
+                        <input type="submit" id="btnUpdate" value="Update" class="btn btn-primary btn-sm" hidden="hidden" />
+                        <input type="button" id="btnCancel" value="Cancel" class="btn btn-primary btn-sm" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+<script>
+    var modal = document.getElementById('myModal');
+    $(document).ready(function () {       
+    });
+
+    $("#btnCancel").click(function () {
+        modal.style.display = "none";
+    });
+
+    $(".close").click(function () {
+        modal.style.display = "none";
+    });
+
+    $("#btnUpdate").click(function () {
+        //$("#btnAdd").hidden();
+        //$("#btnUpdate").show();
+        var datastr = $('#UpdateLog').serialize();
+        $.ajax({
+            url: '@Url.Action("UpdateLog")',
+            type: "POST",
+            data: datastr,
+            success: function (result) {
+                alert("Done..!! Basic Details updated successfully");
+                modal.style.display = "none";
+            },
+            error: function (result) {
+                alert("Warning..!! Record Not Updated");
+                modal.style.display = "none";
+            }
+        });
+        return false;
+    });
+
+    $("#btnAdd").click(function () {
+        //$("#btnUpdate").hide();
+        //$("#btnAdd").show();
+        var datastr = $('#UpdateLog').serialize();
+        $.ajax({
+            url: '@Url.Action("AddRecord")',
+            type: "POST",
+            data: datastr,
+            success: function (result) {
+                alert("Done..!! Basic Details Added successfully");
+                modal.style.display = "none";
+            },
+            error: function (result) {
+                alert("Warning..!! Record Not Added");
+                modal.style.display = "none";
+            }
+        });
+        return false;
+    });
+</script>

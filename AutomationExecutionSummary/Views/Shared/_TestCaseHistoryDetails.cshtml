@@ -1,0 +1,182 @@
+﻿@model List<AutomationExecutionSummary.Models.Dashboard.Dashboard>
+@{
+    int counter = 1;
+    if (Model.Count > 10)
+    {
+        counter = 11;
+    }
+    else
+    {
+        counter = Model.Count;
+    }
+}
+<div class="container">
+    Previous 10 results
+    <div class="table-responsive">
+        <table class="table table-fixed">
+            <thead>
+                <tr>
+                    <th width="10%">Date</th>
+                    <th width="10%">Result</th>
+                    <th width="10%">Bug ID</th>
+                    <th width="15%">Failure Category</th>
+                    <th width="33%">Comment</th>
+                    <th width="22%">Environment</th>
+                    @*<th width="20%">Agreement URL</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @if (counter > 1)
+                {
+                    for (int i = 1; i < counter; i++)
+                    {
+                        <tr>
+                            <td width="10%">
+                                @Model[i].ExecutionDate.ToShortDateString()
+                            </td>
+                            <td width="10%">
+                                @Model[i].OutCome
+                            </td>
+                            <td width="10%">
+                                @Model[i].BugID
+                            </td>
+                            <td width="15%">
+                                @Model[i].Extra_One
+                            </td>
+                            <td width="33%">
+                                @Model[i].Comment
+                            </td>
+                            <td width="22%">
+                                @Model[i].InstanceURL
+                            </td>
+                            @*<td width="20%">
+                                    @Model[i].Extra_Two
+                                </td>*@
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .table-fixed thead {
+        background-color: #fe8b48;
+    }
+
+    .table-fixed tbody tr:nth-of-type(odd) {
+        background-color: #d4d1d0;
+    }
+</style>
+
+<style>
+    .table-fixed tbody {
+        height: 335px;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .table-fixed thead,
+    .table-fixed tbody,
+    .table-fixed tr,
+    .table-fixed td,
+    .table-fixed th {
+        display: block;
+    }
+
+        .table-fixed tr:after {
+            content: "";
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+
+        .table-fixed tbody td,
+        .table-fixed thead > tr > th {
+            float: left;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            height: auto;
+        }
+
+    /*
+    Force table width to 100%
+    */
+    table.table-fixedheader {
+        width: 100%;
+    }
+        /*
+    Set table elements to block mode.  (Normally they are inline).
+    This allows a responsive table, such as one where columns can be stacked
+    if the display is narrow.
+    */
+        table.table-fixedheader, table.table-fixedheader > thead, table.table-fixedheader > tbody, table.table-fixedheader > thead > tr, table.table-fixedheader > tbody > tr, table.table-fixedheader > thead > tr > th, table.table-fixedheader > tbody > td {
+            display: block;
+        }
+
+            table.table-fixedheader > thead > tr:after, table.table-fixedheader > tbody > tr:after {
+                content: ' ';
+                display: inline;
+                visibility: hidden;
+                clear: both;
+            }
+            /*
+    When scrolling the table, actually it is only the tbody portion of the
+    table that scrolls (not the entire table: we want the thead to remain
+    fixed).  We must specify an explicit height for the tbody.  We include
+    100px as a default, but it can be overridden elsewhere.
+
+    Also, we force the scrollbar to always be displayed so that the usable
+    width for the table contents doesn't change (such as becoming narrower
+    when a scrollbar is visible and wider when it is not).
+    */
+            table.table-fixedheader > tbody {
+                overflow-y: scroll;
+                height: 90%;
+            }
+            /*
+    We really don't want to scroll the thead contents, but we want to force
+    a scrollbar to be displayed anyway so that the usable width of the thead
+    will exactly match the tbody.
+    */
+            table.table-fixedheader > thead {
+                overflow-y: scroll;
+            }
+                /*
+    For browsers that support it (webkit), we set the background color of
+    the unneeded scrollbar in the thead to make it invisible.  (Setting
+    visiblity: hidden defeats the purpose, as this alters the usable width
+    of the thead.)
+    */
+                table.table-fixedheader > thead::-webkit-scrollbar {
+                    background-color: inherit;
+                }
+
+                table.table-fixedheader > thead > tr > th:after, table.table-fixedheader > tbody > tr > td:after {
+                    content: ' ';
+                    display: table-cell;
+                    visibility: hidden;
+                    clear: both;
+                }
+
+                /*
+    We want to set <th> and <td> elements to float left.
+    We also must explicitly set the width for each column (both for the <th>
+    and the <td>).  We set to 20% here a default placeholder, but it can be
+    overridden elsewhere.
+    */
+
+                table.table-fixedheader > thead tr th, table.table-fixedheader > tbody tr td {
+                    float: left;
+                    word-wrap: break-word;
+                }
+</style>
+
+<script>
+    var modal = document.getElementById('histoyModal');
+
+    $(".close").click(function () {
+        modal.style.display = "none";
+    });
+</script>
