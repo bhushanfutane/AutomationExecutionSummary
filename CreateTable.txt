@@ -1,0 +1,43 @@
+USE [AutomationLOG]
+GO
+
+/****** Object:  Table [dbo].[tbl_TestResults]    Script Date: 5/22/2018 9:54:04 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[tbl_TestResults](
+	[LogId] [bigint] IDENTITY(1,1) NOT NULL,
+	[TestCaseId] [nvarchar](100) NULL,
+	[OutCome] [nvarchar](50) NULL,
+	[Duration] [time](7) NULL,
+	[Comment] [nvarchar](max) NULL,
+	[TestSuiteName] [nvarchar](200) NULL,
+	[ResultDirectory] [nvarchar](200) NULL,
+	[InstanceURL] [nvarchar](500) NULL,
+	[MachineName] [nvarchar](20) NULL,
+	[ExecutionDate] [date] NULL,
+	[ExecutionTime] [time](7) NULL,
+	[ExecutionSource] [nvarchar](50) NULL,
+	[RunId] [int] NULL,
+	[BuildTestRunID] [varchar](40) NULL,
+	[ReRun] [varchar](20) NULL,
+	[TestOwner] [varchar](40) NULL,
+	[BugID] [nvarchar](20) NULL,
+	[ICMBuildNo] [nvarchar](30) NULL,
+	[Exception] [nvarchar](max) NULL,
+	[Extra_One] [nvarchar](max) NULL,
+	[Extra_Two] [nvarchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
